@@ -15,6 +15,13 @@ const AllTasks = () => {
     },
   });
 
+  const handleDelete = async (id) => {
+    console.log(id)
+   const {data} =await axios.delete(`${import.meta.env.VITE_API_URL}/tasks/${id}`)
+    console.log(data)
+    refetch()
+  }
+
   console.log(tasks);
   return (
     <div className="my-8">
@@ -25,7 +32,7 @@ const AllTasks = () => {
           {tasks
             .filter((task) => task?.status === "To Do")
             .map((task) => (
-              <Task key={task?._id} task={task} />
+              <Task key={task?._id} task={task} handleDelete={handleDelete} />
             ))}
         </div>
         {/* In Progress Column */}
@@ -34,7 +41,7 @@ const AllTasks = () => {
           {tasks
             .filter((task) => task?.status === "In Progress")
             .map((task) => (
-              <Task key={task?._id} task={task} />
+              <Task key={task?._id} task={task} handleDelete={handleDelete}/>
             ))}
         </div>
         {/* To Do Column */}
@@ -43,7 +50,7 @@ const AllTasks = () => {
           {tasks
             .filter((task) => task?.status === "Done")
             .map((task) => (
-              <Task key={task?._id} task={task} />
+              <Task key={task?._id} task={task} handleDelete={handleDelete}/>
             ))}
         </div>
       </div>
