@@ -34,13 +34,16 @@ async function run() {
 
       //---------------------------- Task -----------------\\
 
-      //save biodata in db
+      //save task in db
       app.post("/tasks", async (req, res) => {
         try {
           const task = req.body;
 
           
-          const result = await tasksCollection.insertOne(task);
+          const result = await tasksCollection.insertOne({
+            ...task,
+            timestamp: Date.now(),
+          });
           res.send({ message: "Task added successfully", result });
         } catch (error) {
           console.error("Error creating task:", error);
