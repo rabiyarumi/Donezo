@@ -1,9 +1,10 @@
 import React from 'react';
+import AllTasks from './AllTasks';
 
 const Home = () => {
     return (
-        <div>
-            home
+        <div className='w-[80%] mx-auto'>
+            <AllTasks/>
         </div>
     );
 };

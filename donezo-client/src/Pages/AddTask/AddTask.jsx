@@ -16,10 +16,11 @@ const AddTask = () => {
     const form = e.target;
     const title = form.title.value;
     const description = form.description.value;
+    const status = form.status.value;
     const email = user?.email;
-    console.table(title, description, email);
 
-    const task = {title, description, email}
+    const task = {title, description, status, email}
+    console.table(task)
 
     
      // save biodata in db
@@ -79,6 +80,21 @@ const AddTask = () => {
                 placeholder="Description"
                 required
               />
+            </div>
+             {/* Status */}
+             <div className="space-y-1 text-sm">
+              <label htmlFor="status" className="block text-gray-600">
+               Status
+              </label>
+              <select id="status" name="status" required>
+                <option value="" disabled selected>
+                  Select a Status
+                </option>
+                <option value="To Do">To Do</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Done">Done</option>
+                
+              </select>
             </div>
 
             {/* Submit Button */}
