@@ -75,6 +75,13 @@ async function run() {
         const result = await tasksCollection.find(query).toArray()
         res.send(result);
       })
+      //get single task
+      app.get("/task/:id", async(req, res) => {
+        const id = req.params.id
+        const query = {_id: new ObjectId(id)}
+        const result = await tasksCollection.findOne(query)
+        res.send(result);
+      })
       //Delete task
       app.delete("/tasks/:id", async(req, res) => {
         const id = req.params.id
@@ -82,6 +89,28 @@ async function run() {
         const result = await tasksCollection.deleteOne(query)
         res.send(result);
       })
+
+      // update user biodata by id
+    app.patch("/tasks/:id", async (req, res) => {
+      const id = req.params.id;
+      const data = req.body;
+      const query = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedData = {
+        $set: {
+          title: data.title,
+          description: data.description,
+          status: data.status,
+        },
+      };
+
+      const result = await tasksCollection.updateOne(
+        query,
+        updatedData,
+        options
+      );
+      res.send(result);
+    });
 
 
     // Connect the client to the server	(optional starting in v4.7)

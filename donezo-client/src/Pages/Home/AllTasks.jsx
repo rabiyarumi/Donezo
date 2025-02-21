@@ -6,7 +6,7 @@ import Task from "./Task";
 const AllTasks = () => {
   const { user } = useAuth();
   const { data: tasks = [], isLoading, refetch } = useQuery({
-    queryKey: ["biodatas"],
+    queryKey: ["tasks"],
     queryFn: async () => {
       const { data } = await axios(
         `${import.meta.env.VITE_API_URL}/tasks/${user?.email}`
