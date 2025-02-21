@@ -25,12 +25,31 @@ async function run() {
     const db = client.db("donezo");
     const usersCollection = db.collection("users");
     const tasksCollection = db.collection("tasks");
+
+
+
+    
     //-------------------------Users-----------------------------\\
     // save  a user in db
     app.post("/users/:email", async (req, res) => {
       const email = req.params.email;
       const query = { email };
       const user = req.body;
+
+    
+
+      // check if user exists in db
+      const isExist = await usersCollection.findOne(query);
+      if (isExist) {
+        return res.send(isExist);
+      }
+      const result = await usersCollection.insertOne({
+        ...user,
+        timestamp: Date.now(),
+      });
+      res.send(result);
+    });
+
 
       //---------------------------- Task -----------------\\
 
@@ -50,23 +69,10 @@ async function run() {
           res.status(500).send({ message: "Internal server error", error });
         }
       });
-
-      // check if user exists in db
-      const isExist = await usersCollection.findOne(query);
-      if (isExist) {
-        return res.send(isExist);
-      }
-      const result = await usersCollection.insertOne({
-        ...user,
-        timestamp: Date.now(),
-      });
-      res.send(result);
-    });
-
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
