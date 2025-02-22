@@ -4,8 +4,8 @@
 A Task Management Application where users can add, edit, delete, and reorder tasks using a drag-and-drop interface. Tasks are categorized into To-Do, In Progress, and Done, with real-time synchronization using MongoDB. Users must be authenticated via Firebase (Google Sign-In) to manage their tasks.
 
 ## 🌐 Live Links
-- **Live Demo:** [[Insert Live URL Here](https://donezo-f6882.web.app/login)]
-- **Backend API:** (https://donezo-server-pi.vercel.app/)
+- **Live Demo:** https://donezo-f6882.web.app/login
+- **Backend API:** https://donezo-server-pi.vercel.app/
 
 ## 📦 Dependencies
 ### Client (Frontend):
